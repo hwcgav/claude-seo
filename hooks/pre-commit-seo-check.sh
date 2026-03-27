@@ -44,7 +44,8 @@ if [ -z "${STAGED_FILES}" ]; then
     exit 0
 fi
 
-for file in ${STAGED_FILES}; do
+while IFS= read -r file; do
+    [ -z "${file}" ] && continue
     if [ ! -f "${file}" ]; then
         continue
     fi
@@ -92,7 +93,7 @@ for file in ${STAGED_FILES}; do
             WARNINGS=$((WARNINGS + 1))
         fi
     fi
-done
+done <<< "${STAGED_FILES}"
 
 echo ""
 if [ "${ERRORS}" -gt 0 ]; then

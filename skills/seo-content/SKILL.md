@@ -10,21 +10,30 @@ license: MIT
 allowed-tools: Read, Grep, Glob, Bash, WebFetch
 metadata:
   author: AgriciDaniel
-  version: "1.6.1"
+  version: "1.7.0"
   category: seo
 ---
 
 # Content Quality & E-E-A-T Analysis
 
-## E-E-A-T Framework (updated Sept 2025 QRG)
+## E-E-A-T Framework (updated March 2026)
 
 Read `skills/seo/references/eeat-framework.md` for full criteria.
 
-### Experience (first-hand signals)
-- Original research, case studies, before/after results
-- Personal anecdotes, process documentation
-- Unique data, proprietary insights
-- Photos/videos from direct experience
+> **Scope:** E-E-A-T now applies to ALL competitive queries, not just YMYL (confirmed across December 2025 and March 2026 core updates). YMYL remains the highest-stakes category, but E-E-A-T signals now matter for: e-commerce reviews, SaaS comparisons, how-to guides, entertainment, lifestyle, and tech content.
+
+### Experience (first-hand signals) -- amplified by March 2026 core update
+
+The March 2026 core update further amplified Experience signals (first "E"). Google now distinguishes "depth vs padding" -- specificity and original data beat verbose generic content.
+
+**Detection signals:**
+- First-hand details: specific numbers, dates, outcomes, names
+- Original photos/media (not stock photos)
+- Case studies with verifiable results
+- Before/after examples with specific details
+- Personal anecdotes: "I tested/used/tried..." language patterns
+- Original data, surveys, or research
+- Process documentation showing actual work done
 
 ### Expertise
 - Author credentials, certifications, bio
@@ -45,6 +54,29 @@ Read `skills/seo/references/eeat-framework.md` for full criteria.
 - Date stamps, transparent corrections
 - Secure site (HTTPS)
 
+## Author Entity Verification
+
+Read `skills/seo-content/references/author-verification.md` for full checklist and example schema.
+
+### Quick Assessment
+
+**On-page:** Author byline present (not "admin"/"staff"/"team"), bio page linked, credentials mentioned, photo present.
+
+**Schema:** Person schema with `name`, `sameAs`, `jobTitle`, `worksFor`, `image`. Verify `sameAs` URLs return 200 OK (broken entity links = negative signal). Author linked to publisher via Organization schema.
+
+**Key sameAs links:** LinkedIn (professional authority), Wikipedia (entity recognition), academic profiles (Google Scholar, ORCID), industry directories (NPI for doctors, bar associations for lawyers, CPA directories for accountants).
+
+### Author Entity Scoring
+
+| Rating | Criteria |
+|--------|----------|
+| **STRONG** | Named author + credentials + Person schema + 3+ sameAs links (all returning 200) |
+| **ADEQUATE** | Named author + some credentials OR Person schema with sameAs |
+| **WEAK** | Generic byline ("admin", "staff") or no author attribution |
+| **MISSING** | No author information at all -- flag as E-E-A-T risk |
+
+> **Context:** Google's Knowledge Graph increasingly relies on verified author entities. Google's systems connect content to known entities (people, brands, experts) to establish credibility.
+
 ## Content Metrics
 
 ### Word Count Analysis
@@ -57,12 +89,12 @@ Compare against page type minimums:
 | Product page | 300+ (400+ for complex products) |
 | Location page | 500-600 |
 
-> **Important:** These are **topical coverage floors**, not targets. Google has confirmed word count is NOT a direct ranking factor. The goal is comprehensive topical coverage; a 500-word page that thoroughly answers the query will outrank a 2,000-word page that doesn't. Use these as guidelines for adequate coverage depth, not rigid requirements.
+> **Important:** These are **topical coverage floors**, not targets. Google has confirmed word count is NOT a direct ranking factor. The goal is comprehensive topical coverage.
 
 ### Readability
 - Flesch Reading Ease: target 60-70 for general audience
 
-> **Note:** Flesch Reading Ease is a useful proxy for content accessibility but is NOT a direct Google ranking factor. John Mueller has confirmed Google does not use basic readability scores for ranking. Yoast deprioritized Flesch scores in v19.3. Use readability analysis as a content quality indicator, not as an SEO metric to optimize directly.
+> **Note:** Flesch Reading Ease is a useful proxy for content accessibility but is NOT a direct Google ranking factor. John Mueller has confirmed Google does not use basic readability scores for ranking. Use as a content quality indicator, not an SEO metric.
 - Grade level: match target audience
 - Sentence length: average 15-20 words
 - Paragraph length: 2-4 sentences
@@ -96,24 +128,28 @@ Compare against page type minimums:
 - Open in new tab for user experience
 - Reasonable count (not excessive)
 
-## AI Content Assessment (Sept 2025 QRG addition)
+## AI Content Assessment (updated Jan 2025 QRG + Dec 2025 core update)
 
-Google's raters now formally assess whether content appears AI-generated.
+January 2025 QRG formally defined AI-generated content. AI use is NOT inherently penalized -- Google evaluates quality regardless of production method. The December 2025 core update was the first to explicitly evaluate AI content authenticity.
 
-### Acceptable AI Content
-- Demonstrates genuine E-E-A-T
-- Provides unique value
+> **Key stat:** 86.5% of top-ranking content uses some AI assistance (Ahrefs, 600K pages). Near-zero correlation (0.011) between AI usage and ranking -- quality is what matters.
+
+### AI Content Can Rank Well IF:
+- Paired with human expert attribution (named author with credentials)
+- Demonstrates genuine E-E-A-T signals
+- Provides unique value and original insights
 - Has human oversight and editing
-- Contains original insights
 
-### Low-Quality AI Content Markers
-- Generic phrasing, lack of specificity
-- No original insight
-- Repetitive structure across pages
-- No author attribution
-- Factual inaccuracies
+### Low-Quality AI Content Markers (flag these)
+- Generic, non-specific phrasing ("In today's fast-paced world...")
+- No original insight or unique data
+- No experience signals (no personal examples, no first-hand details)
+- Factual errors or outdated information
+- Repetitive sentence structure
+- No human author attribution
+- Missing publication/update dates
 
-> **Helpful Content System (March 2024):** The Helpful Content System was merged into Google's core ranking algorithm during the March 2024 core update. It no longer operates as a standalone classifier. Helpfulness signals are now weighted within every core update. The same principles apply (people-first content, demonstrating E-E-A-T, satisfying user intent), but enforcement is continuous rather than through separate HCU updates.
+> **Helpful Content System (March 2024):** Merged into Google's core ranking algorithm. No longer a standalone classifier. Helpfulness signals are now weighted within every core update.
 
 ## AI Citation Readiness (GEO signals)
 
@@ -131,21 +167,31 @@ Optimize for AI search engines (ChatGPT, Perplexity, Google AI Overviews):
 **Google AI Mode** launched publicly in May 2025 as a separate tab in Google Search, available in 180+ countries. Unlike AI Overviews (which appear above organic results), AI Mode provides a fully conversational search experience with **zero organic blue links**, making AI citation the only visibility mechanism.
 
 **Key optimization strategies for AI citation:**
-- **Structured answers:** Clear question-answer formats, definition patterns, and step-by-step instructions that AI systems can extract and cite
-- **First-party data:** Original research, statistics, case studies, and unique datasets are highly cited by AI systems
-- **Schema markup:** Article, FAQ (for non-Google AI platforms), and structured content schemas help AI systems parse and attribute content
-- **Topical authority:** AI systems preferentially cite sources that demonstrate deep expertise. Build content clusters, not isolated pages
-- **Entity clarity:** Ensure brand, authors, and key concepts are clearly defined with structured data (Organization, Person schema)
-- **Multi-platform tracking:** Monitor visibility across Google AI Overviews, AI Mode, ChatGPT, Perplexity, and Bing Copilot, not just traditional rankings. Treat AI citation as a standalone KPI alongside organic rankings and traffic.
+- **Structured answers:** Clear question-answer formats, definition patterns, step-by-step instructions
+- **First-party data:** Original research, statistics, case studies, unique datasets
+- **Schema markup:** Article, FAQ (for non-Google AI platforms), structured content schemas
+- **Topical authority:** Build content clusters, not isolated pages
+- **Entity clarity:** Brand, authors, and key concepts defined with structured data (Organization, Person schema)
+- **Multi-platform tracking:** Monitor visibility across Google AI Overviews, AI Mode, ChatGPT, Perplexity, and Bing Copilot
 
 **Generative Engine Optimization (GEO):**
-GEO is the emerging discipline of optimizing content specifically for AI-generated answers. Key GEO signals include: quotability (clear, concise extractable facts), attribution (source citations within your content), structure (well-organized heading hierarchy), and freshness (regularly updated data). Cross-reference the `seo-geo` skill for detailed GEO workflows.
+GEO is the emerging discipline of optimizing content for AI-generated answers. Key signals: quotability, attribution, structure, and freshness. Cross-reference the `seo-geo` skill for detailed GEO workflows.
 
-## Content Freshness
+## Content Freshness Signals
 
-- Publication date visible
-- Last updated date if content has been revised
+### On-Page
+- Visible "Last updated" or "Published" date on page
+- Recommendation: include visible "Last reviewed: [date]" on all key content pages
 - Flag content older than 12 months without update for fast-changing topics
+
+### Schema
+- `datePublished` in schema (Article, BlogPosting)
+- `dateModified` in schema (should differ from `datePublished` if content was updated)
+- Both dates present and valid ISO 8601 format
+
+### Freshness Impact
+- Pages updated within 30 days get 3.2x more ChatGPT citations vs pages >90 days old
+- Freshness is a ranking factor for time-sensitive queries and a citation factor for AI search
 
 ## Output
 
@@ -158,6 +204,8 @@ GEO is the emerging discipline of optimizing content specifically for AI-generat
 | Expertise | XX/25 | ... |
 | Authoritativeness | XX/25 | ... |
 | Trustworthiness | XX/25 | ... |
+
+### Author Entity Rating: STRONG / ADEQUATE / WEAK / MISSING
 
 ### AI Citation Readiness: XX/100
 

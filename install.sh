@@ -37,7 +37,7 @@ main() {
 
     # Clone or update
     TEMP_DIR=$(mktemp -d)
-    trap "rm -rf ${TEMP_DIR}" EXIT
+    trap 'rm -rf "${TEMP_DIR}"' EXIT
 
     echo "↓ Downloading Claude SEO (${REPO_TAG})..."
     git clone --depth 1 --branch "${REPO_TAG}" "${REPO_URL}" "${TEMP_DIR}/claude-seo" 2>/dev/null

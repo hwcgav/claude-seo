@@ -9,6 +9,7 @@ Usage:
 
 import argparse
 import ipaddress
+import os
 import socket
 import sys
 from typing import Optional
@@ -93,11 +94,12 @@ def fetch_page(
     try:
         resolved_ip = socket.gethostbyname(parsed.hostname)
         ip = ipaddress.ip_address(resolved_ip)
-        if ip.is_private or ip.is_loopback or ip.is_reserved:
+        if ip.is_private or ip.is_loopback or ip.is_reserved or ip.is_link_local:
             result["error"] = f"Blocked: URL resolves to private/internal IP ({resolved_ip})"
             return result
     except (socket.gaierror, ValueError):
-        pass  # DNS resolution failure handled by requests below
+        result["error"] = "Blocked: DNS resolution failed for target host"
+        return result
 
     try:
         session = requests.Session()
@@ -175,6 +177,12 @@ def main():
         sys.exit(1)
 
     if args.output:
+        output_path = os.path.realpath(args.output)
+        cwd = os.getcwd()
+        home = os.path.expanduser("~")
+        if not (output_path.startswith(cwd) or output_path.startswith(home)):
+            print("Error: Output path must be within current directory or home directory", file=sys.stderr)
+            sys.exit(1)
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(result["content"])
         print(f"Saved to {args.output}")

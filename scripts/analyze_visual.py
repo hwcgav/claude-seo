@@ -80,11 +80,12 @@ def analyze_visual(url: str, timeout: int = 30000) -> dict:
     try:
         resolved_ip = socket.gethostbyname(parsed.hostname)
         ip = ipaddress.ip_address(resolved_ip)
-        if ip.is_private or ip.is_loopback or ip.is_reserved:
+        if ip.is_private or ip.is_loopback or ip.is_reserved or ip.is_link_local:
             result["error"] = f"Blocked: URL resolves to private/internal IP ({resolved_ip})"
             return result
     except socket.gaierror:
-        pass
+        result["error"] = "Blocked: DNS resolution failed for target host"
+        return result
 
     try:
         with sync_playwright() as p:

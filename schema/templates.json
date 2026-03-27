@@ -208,6 +208,89 @@
           }
         }
       }
+    },
+    {
+      "type": "ConferenceEvent",
+      "description": "Conferences, summits, and professional gatherings. Added in Schema.org v29.4 (December 2025). Enables event rich results with conference-specific details.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "ConferenceEvent",
+        "name": "[Conference Name]",
+        "description": "[Conference Description]",
+        "startDate": "[YYYY-MM-DDTHH:MM:SSZ]",
+        "endDate": "[YYYY-MM-DDTHH:MM:SSZ]",
+        "location": {
+          "@type": "Place",
+          "name": "[Venue Name]",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "[Street]",
+            "addressLocality": "[City]",
+            "addressRegion": "[State]",
+            "postalCode": "[ZIP]",
+            "addressCountry": "[Country]"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "[Organizer Name]",
+          "url": "[Organizer URL]"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "[Price]",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "[Ticket URL]"
+        },
+        "image": "[Event Image URL]",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled"
+      }
+    },
+    {
+      "type": "PerformingArtsEvent",
+      "description": "Concerts, theater performances, dance shows, and other performing arts events. Added in Schema.org v29.4 (December 2025).",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "PerformingArtsEvent",
+        "name": "[Performance Name]",
+        "description": "[Performance Description]",
+        "startDate": "[YYYY-MM-DDTHH:MM:SSZ]",
+        "endDate": "[YYYY-MM-DDTHH:MM:SSZ]",
+        "location": {
+          "@type": "Place",
+          "name": "[Venue Name]",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "[Street]",
+            "addressLocality": "[City]",
+            "addressRegion": "[State]",
+            "postalCode": "[ZIP]",
+            "addressCountry": "[Country]"
+          }
+        },
+        "performer": {
+          "@type": "Person",
+          "name": "[Performer Name]",
+          "sameAs": "[Performer Profile URL]"
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "[Organizer/Venue Name]",
+          "url": "[Organizer URL]"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "[Price]",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "[Ticket URL]"
+        },
+        "image": "[Event Image URL]",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled"
+      }
     }
   ]
 }

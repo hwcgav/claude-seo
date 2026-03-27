@@ -96,13 +96,17 @@ main() {
     echo "→ Configuring MCP server..."
     FIELD_CONFIG_PATH="${SEO_SKILL_DIR}/dataforseo-field-config.json"
 
+    DFSE_USERNAME="${DFSE_USERNAME}" \
+    DFSE_PASSWORD="${DFSE_PASSWORD}" \
+    SETTINGS_FILE="${SETTINGS_FILE}" \
+    FIELD_CONFIG_PATH="${FIELD_CONFIG_PATH}" \
     python3 -c "
-import json, os, sys
+import json, os, stat, sys
 
-settings_path = '${SETTINGS_FILE}'
-username = '''${DFSE_USERNAME}'''
-password = '''${DFSE_PASSWORD}'''
-field_config = '${FIELD_CONFIG_PATH}'
+settings_path = os.environ['SETTINGS_FILE']
+username = os.environ['DFSE_USERNAME']
+password = os.environ['DFSE_PASSWORD']
+field_config = os.environ['FIELD_CONFIG_PATH']
 
 # Read existing settings or create new
 if os.path.exists(settings_path):
@@ -118,7 +122,7 @@ if 'mcpServers' not in settings:
 # Add DataForSEO server config
 settings['mcpServers']['dataforseo'] = {
     'command': 'npx',
-    'args': ['-y', 'dataforseo-mcp-server'],
+    'args': ['-y', 'dataforseo-mcp-server@2.8.7'],
     'env': {
         'DATAFORSEO_USERNAME': username,
         'DATAFORSEO_PASSWORD': password,
@@ -127,9 +131,10 @@ settings['mcpServers']['dataforseo'] = {
     }
 }
 
-# Write back
+# Write back with restricted permissions
 os.makedirs(os.path.dirname(settings_path), exist_ok=True)
-with open(settings_path, 'w') as f:
+fd = os.open(settings_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+with os.fdopen(fd, 'w') as f:
     json.dump(settings, f, indent=2)
 
 print('  ✓ MCP server configured in settings.json')
@@ -141,7 +146,7 @@ print('  ✓ MCP server configured in settings.json')
 
     # Pre-warm npx package
     echo "→ Pre-downloading dataforseo-mcp-server..."
-    npx -y dataforseo-mcp-server --help >/dev/null 2>&1 || true
+    npx -y dataforseo-mcp-server@2.8.7 --help >/dev/null 2>&1 || true
 
     echo ""
     echo "✓ DataForSEO extension installed successfully!"

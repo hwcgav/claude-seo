@@ -61,9 +61,9 @@ main() {
     # Check if nanobanana-mcp is already configured
     MCP_CONFIGURED=false
     if [ -f "${SETTINGS_FILE}" ]; then
-        if python3 -c "
-import json
-with open('${SETTINGS_FILE}', 'r') as f:
+        if SETTINGS_FILE="${SETTINGS_FILE}" python3 -c "
+import json, os
+with open(os.environ['SETTINGS_FILE'], 'r') as f:
     settings = json.load(f)
 if 'mcpServers' in settings and 'nanobanana-mcp' in settings['mcpServers']:
     exit(0)
@@ -91,10 +91,13 @@ else:
 
         # Configure MCP server
         echo "→ Configuring nanobanana-mcp server..."
+        GOOGLE_AI_API_KEY="${GOOGLE_AI_API_KEY}" \
+        SETTINGS_FILE="${SETTINGS_FILE}" \
         python3 -c "
-import json, os
+import json, os, stat
 
-settings_path = '${SETTINGS_FILE}'
+settings_path = os.environ['SETTINGS_FILE']
+api_key = os.environ['GOOGLE_AI_API_KEY']
 
 # Read existing settings or create new
 if os.path.exists(settings_path):
@@ -110,15 +113,16 @@ if 'mcpServers' not in settings:
 # Add nanobanana-mcp server config
 settings['mcpServers']['nanobanana-mcp'] = {
     'command': 'npx',
-    'args': ['-y', '@ycse/nanobanana-mcp@latest'],
+    'args': ['-y', '@ycse/nanobanana-mcp@1.1.1'],
     'env': {
-        'GOOGLE_AI_API_KEY': '''${GOOGLE_AI_API_KEY}'''
+        'GOOGLE_AI_API_KEY': api_key
     }
 }
 
-# Write back
+# Write back with restricted permissions
 os.makedirs(os.path.dirname(settings_path), exist_ok=True)
-with open(settings_path, 'w') as f:
+fd = os.open(settings_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+with os.fdopen(fd, 'w') as f:
     json.dump(settings, f, indent=2)
 
 print('  ✓ nanobanana-mcp configured in settings.json')
@@ -148,7 +152,7 @@ print('  ✓ nanobanana-mcp configured in settings.json')
 
     # Pre-warm npx package
     echo "→ Pre-downloading nanobanana-mcp..."
-    npx -y @ycse/nanobanana-mcp@latest --help >/dev/null 2>&1 || true
+    npx -y @ycse/nanobanana-mcp@1.1.1 --help >/dev/null 2>&1 || true
 
     echo ""
     echo "✓ Banana Image Generation extension installed successfully!"
