@@ -179,3 +179,9 @@ id_rsa
 id_rsa.*
 id_ed25519
 id_ed25519.*
+
+# local credentials — never commit
+dataforseo-mcp-config.json
+
+# installer-generated at runtime from extensions/dataforseo/field-config.json
+skills/seo/dataforseo-field-config.json

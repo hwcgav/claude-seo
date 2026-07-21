@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Audit Report — fishfindermounts.com</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --void: #060a13;
+    --deep: #0a1120;
+    --panel: #0d1729;
+    --surface: #111d32;
+    --edge: #1a2d4d;
+    --line: rgba(56,189,248,0.08);
+    --text: #c8d6e5;
+    --text-bright: #e8f0f8;
+    --text-dim: #5a7a9a;
+    --cyan: #38bdf8;
+    --cyan-glow: rgba(56,189,248,0.15);
+    --teal: #2dd4bf;
+    --teal-glow: rgba(45,212,191,0.12);
+    --rose: #fb7185;
+    --rose-glow: rgba(251,113,133,0.12);
+    --amber: #fbbf24;
+    --amber-glow: rgba(251,191,36,0.10);
+    --emerald: #34d399;
+    --emerald-glow: rgba(52,211,153,0.10);
+    --violet: #a78bfa;
+    --violet-glow: rgba(167,139,250,0.10);
+    --orange: #fb923c;
+    --orange-glow: rgba(251,146,60,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page { size: A4; margin: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text);
+    background: var(--void);
+    font-size: 10.5px;
+    line-height: 1.6;
+    padding: 16mm 18mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ═══ NOISE TEXTURE ═══ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ═══ COVER ═══ */
+  .cover {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(45,212,191,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(56,189,248,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(167,139,250,0.04) 0%, transparent 60%),
+      linear-gradient(180deg, #060a13 0%, #0a1120 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 48px;
+    margin: -16mm -18mm 0;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 48px; left: 48px; right: 48px; bottom: 48px;
+    border: 1px solid rgba(56,189,248,0.06);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .cover-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 28px;
+    position: relative;
+    padding-left: 20px;
+  }
+  .cover-tag::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 12px;
+    height: 1px;
+    background: var(--cyan);
+  }
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .cover h1 em {
+    font-style: italic;
+    color: var(--cyan);
+  }
+  .cover .subtitle {
+    font-size: 15px;
+    color: var(--text-dim);
+    font-weight: 300;
+    margin-bottom: 56px;
+    letter-spacing: 0.5px;
+  }
+  .cover-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--edge);
+    border: 1px solid var(--edge);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cover-cell {
+    background: var(--panel);
+    padding: 20px 24px;
+  }
+  .cover-cell .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .cover-cell .value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  .cover-cell .value.score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--amber);
+  }
+
+  /* ═══ SECTION HEADINGS ═══ */
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-bright);
+    margin: 24px 0 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--edge);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    page-break-after: avoid;
+  }
+  h2 .idx {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--void);
+    background: var(--cyan);
+    width: 24px; height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  h2 .h2-score {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+  }
+  h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin: 14px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 12px 0 6px;
+  }
+  p { margin-bottom: 5px; }
+  ul { padding-left: 16px; margin: 4px 0 8px; }
+  li { margin-bottom: 3px; }
+  strong { color: var(--text-bright); font-weight: 600; }
+
+  /* ═══ SCORE HERO ═══ */
+  .score-hero {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+    align-items: center;
+    margin: 10px 0 16px;
+    padding: 22px 28px;
+    background:
+      radial-gradient(ellipse 50% 80% at 10% 50%, var(--cyan-glow) 0%, transparent 70%),
+      var(--panel);
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+  }
+  .score-ring { width: 150px; height: 150px; position: relative; margin: 0 auto; }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring .bg { stroke: var(--surface); }
+  .score-ring .fill { stroke: var(--amber); stroke-linecap: round; }
+  .score-ring .score-text {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); text-align: center;
+  }
+  .score-ring .score-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 44px; font-weight: 800;
+    color: var(--text-bright);
+    display: block; line-height: 1;
+  }
+  .score-ring .score-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-dim);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .score-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .score-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px;
+    background: var(--deep);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .score-row .cat-name { flex: 1; font-size: 10px; font-weight: 500; color: var(--text); }
+  .score-row .cat-weight {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; color: var(--text-dim); min-width: 24px;
+  }
+  .score-row .cat-bar { width: 64px; height: 4px; background: var(--surface); border-radius: 2px; overflow: hidden; }
+  .score-row .cat-bar-fill { height: 100%; border-radius: 2px; }
+  .score-row .cat-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; min-width: 24px; text-align: right;
+    color: var(--text-bright);
+  }
+
+  /* ═══ EXEC SUMMARY ═══ */
+  .exec-summary {
+    background: var(--panel);
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    padding: 24px;
+    margin: 8px 0 14px;
+  }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+  .problem-card {
+    padding: 14px 16px;
+    border-radius: 6px;
+    border-left: 3px solid;
+    background: var(--deep);
+  }
+  .problem-card.perf       { border-color: var(--rose);   }
+  .problem-card.content    { border-color: var(--orange);  }
+  .problem-card.ai         { border-color: var(--cyan);    }
+  .problem-card.security   { border-color: var(--amber);   }
+  .problem-card.conversion { border-color: var(--violet);  }
+  .problem-card .pc-title  { font-weight: 700; font-size: 11px; margin-bottom: 4px; color: var(--text-bright); }
+  .problem-card .pc-desc   { font-size: 9.5px; color: var(--text-dim); line-height: 1.55; }
+
+  /* ═══ TABLES ═══ */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 8px 0 16px;
+    font-size: 10px;
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  thead th {
+    background: var(--surface);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    text-align: left;
+    padding: 9px 14px;
+    color: var(--text-dim);
+    font-size: 8.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border-bottom: 1px solid var(--edge);
+  }
+  tbody td {
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(26,45,77,0.5);
+    vertical-align: top;
+    color: var(--text);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.01); }
+
+  /* ═══ BADGES ═══ */
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .badge-critical { background: var(--rose-glow);    color: var(--rose); }
+  .badge-high     { background: var(--orange-glow);  color: var(--orange); }
+  .badge-medium   { background: var(--amber-glow);   color: var(--amber); }
+  .badge-low      { background: var(--emerald-glow); color: var(--emerald); }
+  .badge-pass     { background: var(--emerald-glow); color: var(--emerald); }
+  .badge-fail     { background: var(--rose-glow);    color: var(--rose); }
+  .badge-missing  { background: var(--rose-glow);    color: var(--rose); }
+  .badge-poor     { background: var(--rose-glow);    color: var(--rose); }
+  .badge-good     { background: var(--emerald-glow); color: var(--emerald); }
+  .badge-warn     { background: var(--amber-glow);   color: var(--amber); }
+  .badge-blocked  { background: var(--rose-glow);    color: var(--rose); }
+  .badge-allowed  { background: var(--emerald-glow); color: var(--emerald); }
+  .badge-present  { background: var(--cyan-glow);    color: var(--cyan); }
+
+  /* ═══ METRIC CARDS (CWV) ═══ */
+  .cwv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+  .cwv-card {
+    background: var(--panel);
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cwv-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .cwv-card.poor::before     { background: linear-gradient(90deg, var(--rose), transparent); }
+  .cwv-card.good::before     { background: linear-gradient(90deg, var(--emerald), transparent); }
+  .cwv-card.needs-imp::before{ background: linear-gradient(90deg, var(--amber), transparent); }
+  .cwv-card .cwv-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; font-weight: 600; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 1.5px;
+  }
+  .cwv-card .cwv-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px; font-weight: 800; margin: 6px 0 2px;
+  }
+  .cwv-card.poor .cwv-value     { color: var(--rose); }
+  .cwv-card.good .cwv-value     { color: var(--emerald); }
+  .cwv-card.needs-imp .cwv-value{ color: var(--amber); }
+  .cwv-card .cwv-threshold {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; color: var(--text-dim); letter-spacing: 0.3px;
+  }
+
+  /* ═══ STAT CARDS ═══ */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0; }
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    padding: 14px;
+    text-align: center;
+  }
+  .stat-card .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px; font-weight: 800; color: var(--text-bright);
+  }
+  .stat-card .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;
+  }
+
+  /* ═══ PLATFORM CARDS ═══ */
+  .platform-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0; }
+  .platform-card {
+    background: var(--panel);
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .platform-card .plat-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px; font-weight: 600; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+  }
+  .platform-card .plat-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px; font-weight: 800;
+  }
+  .platform-card .plat-note { font-size: 8.5px; color: var(--text-dim); margin-top: 6px; line-height: 1.4; }
+
+  /* ═══ ACTION CARDS ═══ */
+  .action {
+    padding: 14px 16px 14px 48px;
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    margin: 8px 0;
+    page-break-inside: avoid;
+    position: relative;
+    background: var(--panel);
+  }
+  .action-num {
+    position: absolute; left: 14px; top: 14px;
+    width: 24px; height: 24px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800; font-size: 11px; color: var(--void);
+  }
+  .action-num.crit { background: var(--rose); }
+  .action-num.high { background: var(--orange); }
+  .action-num.med  { background: var(--amber); }
+  .action .action-title { font-weight: 700; font-size: 11.5px; color: var(--text-bright); margin-bottom: 3px; }
+  .action .action-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-dim); margin-bottom: 5px;
+  }
+  .action .action-meta span { margin-right: 16px; }
+  .action .action-desc { font-size: 10px; color: var(--text); line-height: 1.55; }
+
+  /* ═══ TIMELINE ═══ */
+  .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+  .timeline-card {
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .timeline-header {
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700; font-size: 10px; color: var(--void);
+    letter-spacing: 0.5px;
+  }
+  .timeline-card:nth-child(1) .timeline-header { background: var(--rose); }
+  .timeline-card:nth-child(2) .timeline-header { background: var(--orange); }
+  .timeline-card:nth-child(3) .timeline-header { background: var(--cyan); }
+  .timeline-body { padding: 12px 14px; font-size: 9.5px; color: var(--text); }
+  .timeline-body li { margin-bottom: 3px; }
+  .timeline-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px; font-weight: 800; margin-top: 8px; text-align: center;
+  }
+  .timeline-card:nth-child(1) .timeline-score { color: var(--rose); }
+  .timeline-card:nth-child(2) .timeline-score { color: var(--orange); }
+  .timeline-card:nth-child(3) .timeline-score { color: var(--cyan); }
+
+  /* ═══ TWO-COL ═══ */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* ═══ UTILITIES ═══ */
+  .page-break { page-break-before: always; }
+  .mt-0 { margin-top: 0; }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(56,189,248,0.08);
+    color: var(--cyan);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 9px;
+  }
+  .report-footer {
+    margin-top: 40px;
+    padding-top: 14px;
+    border-top: 1px solid var(--edge);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+  .roi-table { margin: 14px 0; }
+  .roi-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700; text-align: center; width: 36px;
+    color: var(--cyan);
+  }
+  .issue { padding: 12px 16px; border: 1px solid var(--edge); border-radius: 6px; margin: 8px 0; page-break-inside: avoid; background: var(--panel); }
+  .issue-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .issue-title { font-weight: 600; font-size: 11px; color: var(--text-bright); }
+  .issue p { font-size: 10px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-tag">SEO Audit Report</div>
+  <h1>fishfindermounts<em>.com</em></h1>
+  <p class="subtitle">Comprehensive SEO Health Assessment & Action Plan</p>
+  <div class="cover-grid">
+    <div class="cover-cell">
+      <div class="label">Audit Date</div>
+      <div class="value">March 27, 2026</div>
+    </div>
+    <div class="cover-cell">
+      <div class="label">Business Type</div>
+      <div class="value">E-commerce (Manufacturer-Direct)</div>
+    </div>
+    <div class="cover-cell">
+      <div class="label">Platform</div>
+      <div class="value">WordPress + WooCommerce + LiteSpeed</div>
+    </div>
+    <div class="cover-cell">
+      <div class="label">URLs Indexed</div>
+      <div class="value">536 pages in sitemap</div>
+    </div>
+    <div class="cover-cell">
+      <div class="label">Products</div>
+      <div class="value">306 products</div>
+    </div>
+    <div class="cover-cell">
+      <div class="label">Health Score</div>
+      <div class="value score">46<span style="font-size:14px; opacity:0.5;">/100</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HEALTH SCORE ═══ -->
+<h2 class="mt-0"><span class="idx">1</span> SEO Health Score</h2>
+
+<div class="score-hero">
+  <div class="score-ring">
+    <svg width="150" height="150" viewBox="0 0 150 150">
+      <circle class="bg" cx="75" cy="75" r="65" fill="none" stroke-width="10"/>
+      <circle class="fill" cx="75" cy="75" r="65" fill="none" stroke-width="10"
+        stroke-dasharray="408.4" stroke-dashoffset="220.5"/>
+    </svg>
+    <div class="score-text">
+      <span class="score-num">46</span>
+      <span class="score-label">of 100</span>
+    </div>
+  </div>
+  <div class="score-breakdown">
+    <div class="score-row">
+      <span class="cat-name">Technical SEO</span>
+      <span class="cat-weight">22%</span>
+      <div class="cat-bar"><div class="cat-bar-fill" style="width:52%; background: var(--amber);"></div></div>
+      <span class="cat-score">52</span>
+    </div>
+    <div class="score-row">
+      <span class="cat-name">Content Quality</span>
+      <span class="cat-weight">23%</span>
+      <div class="cat-bar"><div class="cat-bar-fill" style="width:52%; background: var(--amber);"></div></div>
+      <span class="cat-score">52</span>
+    </div>
+    <div class="score-row">
+      <span class="cat-name">On-Page SEO</span>
+      <span class="cat-weight">20%</span>
+      <div class="cat-bar"><div class="cat-bar-fill" style="width:45%; background: var(--amber);"></div></div>
+      <span class="cat-score">45</span>
+    </div>
+    <div class="score-row">
+      <span class="cat-name">Schema Markup</span>
+      <span class="cat-weight">10%</span>
+      <div class="cat-bar"><div class="cat-bar-fill" style="width:40%; background: var(--rose);"></div></div>
+      <span class="cat-score">40</span>
+    </div>
+    <div class="score-row">
+      <span class="cat-name">Performance (CWV)</span>
+      <span class="cat-weight">10%</span>
+      <div class="cat-bar"><div class="cat-bar-fill" style="width:56%; background: var(--amber);"></div></div>
+      <span class="cat-score">56</span>
+    </div>
+    <div class="score-row">
+      <span class="cat-name">AI Search Readiness</span>
+      <span class="cat-weight">10%</span>
+      <div class="cat-bar"><div class="cat-bar-fill" style="width:21%; background: var(--rose);"></div></div>
+      <span class="cat-score">21</span>
+    </div>
+    <div class="score-row">
+      <span class="cat-name">Images</span>
+      <span class="cat-weight">5%</span>
+      <div class="cat-bar"><div class="cat-bar-fill" style="width:35%; background: var(--rose);"></div></div>
+      <span class="cat-score">35</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EXECUTIVE SUMMARY ═══ -->
+<h2><span class="idx">2</span> Executive Summary</h2>
+<div class="exec-summary">
+  <p>FishFinderMounts.com is a niche e-commerce manufacturer with a genuine product story and real engineering expertise — but the website severely under-leverages these strengths. The site suffers from <strong>five systemic problems</strong>:</p>
+  <div class="problem-grid">
+    <div class="problem-card perf">
+      <div class="pc-title">Performance Crisis</div>
+      <div class="pc-desc">Mobile LCP is 15.2s (6x over "poor" threshold) due to no page caching, a 7MB video, and 528KB HTML bloat.</div>
+    </div>
+    <div class="problem-card content">
+      <div class="pc-title">Content Desert</div>
+      <div class="pc-desc">Zero blog posts, zero buying guides, thin category pages with no text, missing meta descriptions site-wide.</div>
+    </div>
+    <div class="problem-card ai">
+      <div class="pc-title">AI Invisibility</div>
+      <div class="pc-desc">GPTBot and Google-Extended blocked in robots.txt. Almost no citable prose for AI to extract.</div>
+    </div>
+    <div class="problem-card security">
+      <div class="pc-title">Security Gap</div>
+      <div class="pc-desc">Zero security headers on an e-commerce site processing payments. PHP version exposed.</div>
+    </div>
+    <div class="problem-card conversion" style="grid-column: span 2;">
+      <div class="pc-title">Conversion Dead-Ends</div>
+      <div class="pc-desc">No CTA visible above the fold on mobile. The most prominent CTA ("Continue Shopping") links to <code>/#</code> — a dead link. Product Wizard buried at y=1452.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CORE WEB VITALS ═══ -->
+<div class="page-break"></div>
+<h2 class="mt-0"><span class="idx">3</span> Core Web Vitals</h2>
+
+<div class="stat-grid" style="grid-template-columns: 1fr 1fr;">
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--rose);">56</div>
+    <div class="stat-label">Mobile Lighthouse</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--amber);">64</div>
+    <div class="stat-label">Desktop Lighthouse</div>
+  </div>
+</div>
+
+<h4>Mobile</h4>
+<div class="cwv-grid">
+  <div class="cwv-card poor"><div class="cwv-label">LCP</div><div class="cwv-value">15.2s</div><div class="cwv-threshold">Good: &le;2.5s &middot; Poor: &gt;4.0s</div></div>
+  <div class="cwv-card good"><div class="cwv-label">CLS</div><div class="cwv-value">0</div><div class="cwv-threshold">Good: &le;0.1 &middot; Poor: &gt;0.25</div></div>
+  <div class="cwv-card good"><div class="cwv-label">TBT (INP)</div><div class="cwv-value">3.5ms</div><div class="cwv-threshold">Good: &le;200ms &middot; Poor: &gt;600ms</div></div>
+</div>
+<h4>Desktop</h4>
+<div class="cwv-grid">
+  <div class="cwv-card needs-imp"><div class="cwv-label">LCP</div><div class="cwv-value">3.8s</div><div class="cwv-threshold">Good: &le;2.5s &middot; Poor: &gt;4.0s</div></div>
+  <div class="cwv-card needs-imp"><div class="cwv-label">CLS</div><div class="cwv-value">0.11</div><div class="cwv-threshold">Good: &le;0.1 &middot; Poor: &gt;0.25</div></div>
+  <div class="cwv-card good"><div class="cwv-label">TBT (INP)</div><div class="cwv-value">0ms</div><div class="cwv-threshold">Good: &le;200ms &middot; Poor: &gt;600ms</div></div>
+</div>
+
+<h4>Supporting Metrics</h4>
+<table>
+  <thead><tr><th>Metric</th><th>Mobile</th><th>Desktop</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>TTFB</td><td>1,240ms</td><td>1,140ms</td><td><span class="badge badge-poor">Poor</span></td></tr>
+    <tr><td>Page Weight</td><td>10 MB</td><td>13 MB</td><td><span class="badge badge-poor">Poor</span></td></tr>
+    <tr><td>HTTP Requests</td><td>108</td><td>116</td><td><span class="badge badge-warn">Excessive</span></td></tr>
+    <tr><td>DOM Elements</td><td>701</td><td>701</td><td><span class="badge badge-good">Good</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Root Causes</h3>
+<ul>
+  <li><strong>No LiteSpeed page cache active</strong> — TTFB is 1.2s (6x over "good" threshold of 200ms)</li>
+  <li><strong>7.2MB .webm video loading eagerly</strong> with zero cache headers — 73% of mobile page weight</li>
+  <li><strong>31 render-blocking CSS files</strong> — 448KB unused CSS on homepage</li>
+  <li><strong>78 script tags</strong> — 352KB unused JS on homepage</li>
+  <li><strong>304KB inline CSS</strong> from Beaver Builder output</li>
+  <li><strong>528KB HTML document</strong> — 57.8% inline CSS, 28.5% inline scripts, only 13.7% content</li>
+  <li><strong>4 Google Font families</strong> loaded via render-blocking external stylesheet</li>
+  <li><strong>WooCommerce cart fragments</strong> firing uncached AJAX on every page load</li>
+  <li><strong>Duplicate Google Tag Manager</strong> — two separate gtag instances (322KB total)</li>
+</ul>
+
+<!-- ═══ TECHNICAL SEO ═══ -->
+<div class="page-break"></div>
+<h2 class="mt-0"><span class="idx">4</span> Technical SEO <span class="h2-score">52 / 100</span></h2>
+
+<h3>Crawlability — AI Crawler Access</h3>
+<table>
+  <thead><tr><th>Crawler</th><th>Status</th><th>Impact</th></tr></thead>
+  <tbody>
+    <tr><td>GPTBot</td><td><span class="badge badge-blocked">Blocked</span></td><td>Eliminates ChatGPT web search citation</td></tr>
+    <tr><td>Google-Extended</td><td><span class="badge badge-blocked">Blocked</span></td><td>May reduce AI Overviews inclusion</td></tr>
+    <tr><td>CCBot</td><td><span class="badge badge-blocked">Blocked</span></td><td>Low impact (training only)</td></tr>
+    <tr><td>ClaudeBot</td><td><span class="badge badge-allowed">Allowed</span></td><td>OK</td></tr>
+    <tr><td>PerplexityBot</td><td><span class="badge badge-allowed">Allowed</span></td><td>OK</td></tr>
+  </tbody>
+</table>
+
+<h3>Security Headers</h3>
+<table>
+  <thead><tr><th>Check</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>HTTPS</td><td><span class="badge badge-pass">Pass</span> SSL active, HTTP &rarr; HTTPS redirect</td></tr>
+    <tr><td>HTTP/2 &amp; HTTP/3</td><td><span class="badge badge-pass">Pass</span></td></tr>
+    <tr><td>xmlrpc.php</td><td><span class="badge badge-pass">Pass</span> Blocked (403)</td></tr>
+    <tr><td>Strict-Transport-Security</td><td><span class="badge badge-missing">Missing</span></td></tr>
+    <tr><td>X-Frame-Options</td><td><span class="badge badge-missing">Missing</span></td></tr>
+    <tr><td>X-Content-Type-Options</td><td><span class="badge badge-missing">Missing</span></td></tr>
+    <tr><td>Content-Security-Policy</td><td><span class="badge badge-missing">Missing</span></td></tr>
+    <tr><td>Referrer-Policy</td><td><span class="badge badge-missing">Missing</span></td></tr>
+    <tr><td>Permissions-Policy</td><td><span class="badge badge-missing">Missing</span></td></tr>
+    <tr><td>X-Powered-By</td><td><span class="badge badge-fail">Exposed</span> PHP/8.3.30</td></tr>
+  </tbody>
+</table>
+
+<h3>Indexability Issues</h3>
+<table>
+  <thead><tr><th>Issue</th><th>Severity</th><th>Details</th></tr></thead>
+  <tbody>
+    <tr><td>Dual H1 tags on every page</td><td><span class="badge badge-high">High</span></td><td>Logo uses &lt;h1&gt; alongside page heading</td></tr>
+    <tr><td>108 thin testimonial pages indexed</td><td><span class="badge badge-high">High</span></td><td>~79 words each, no meta descriptions</td></tr>
+    <tr><td>Meta descriptions missing</td><td><span class="badge badge-critical">Critical</span></td><td>Missing on About, FAQ, categories, testimonials</td></tr>
+    <tr><td>Homepage only 269 words</td><td><span class="badge badge-medium">Medium</span></td><td>Thin for an e-commerce homepage</td></tr>
+    <tr><td>og:title set to "Home"</td><td><span class="badge badge-low">Low</span></td><td>Should match actual title tag</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ CONTENT QUALITY ═══ -->
+<div class="page-break"></div>
+<h2 class="mt-0"><span class="idx">5</span> Content Quality &amp; E-E-A-T <span class="h2-score">52 / 100</span></h2>
+
+<h3>E-E-A-T Assessment</h3>
+<table>
+  <thead><tr><th>Signal</th><th>Score</th><th>Key Findings</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Experience</strong></td><td><strong>68/100</strong></td><td>Genuine founder story. Customer testimonials with names. But no named founders, no team photos, no how-to content.</td></tr>
+    <tr><td><strong>Expertise</strong></td><td><strong>55/100</strong></td><td>Product descriptions show CNC machining knowledge. FAQ is detailed. But zero educational content, no spec tables.</td></tr>
+    <tr><td><strong>Authoritativeness</strong></td><td><strong>38/100</strong></td><td>Registered trademark (CVP Solutions Inc.). But no press mentions, no awards, no partnerships, generic brand name.</td></tr>
+    <tr><td><strong>Trustworthiness</strong></td><td><strong>62/100</strong></td><td>HTTPS, toll-free phone, 90-day guarantee. But no physical address, no returns page, no trust badges.</td></tr>
+  </tbody>
+</table>
+
+<h3>Content Depth by Page Type</h3>
+<table>
+  <thead><tr><th>Page</th><th>Words</th><th>Unique Prose</th><th>Meta Desc</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Homepage</td><td>565</td><td>~150 words</td><td>123 chars</td><td><span class="badge badge-warn">Thin</span></td></tr>
+    <tr><td>About Us</td><td>1,052</td><td>Authentic story</td><td><span class="badge badge-missing">Missing</span></td><td><span class="badge badge-good">Good</span></td></tr>
+    <tr><td>FAQ</td><td>1,491</td><td>11 detailed Q&amp;As</td><td><span class="badge badge-missing">Missing</span></td><td><span class="badge badge-good">Strong</span></td></tr>
+    <tr><td>Live Sonar Category</td><td>1,031</td><td>~50 words</td><td><span class="badge badge-missing">Missing</span></td><td><span class="badge badge-fail">Critical</span></td></tr>
+    <tr><td>Gen4 Product ($719)</td><td>1,234</td><td>~500 words</td><td>189 chars</td><td><span class="badge badge-warn">Moderate</span></td></tr>
+    <tr><td>Testimonials</td><td>1,167</td><td>Named reviewers</td><td><span class="badge badge-missing">Missing</span></td><td><span class="badge badge-good">Good</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Thin Content Detection</h3>
+<table>
+  <thead><tr><th>Page Type</th><th>Count</th><th>Risk Level</th></tr></thead>
+  <tbody>
+    <tr><td>Category pages (product grids, zero text)</td><td>30+</td><td><span class="badge badge-critical">Critical</span></td></tr>
+    <tr><td>Individual testimonials (~79 words each)</td><td>108</td><td><span class="badge badge-critical">Critical</span></td></tr>
+    <tr><td>Blog / Resources</td><td>0</td><td><span class="badge badge-critical">Critical</span></td></tr>
+    <tr><td>Homepage (~150 unique words)</td><td>1</td><td><span class="badge badge-high">High</span></td></tr>
+    <tr><td>Product pages (descriptions but no specs)</td><td>306</td><td><span class="badge badge-medium">Medium</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ SCHEMA ═══ -->
+<h2><span class="idx">6</span> Schema &amp; Structured Data <span class="h2-score">40 / 100</span></h2>
+<div class="two-col">
+  <div>
+    <h4>Existing Schema</h4>
+    <table>
+      <thead><tr><th>Type</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Organization</td><td><span class="badge badge-pass">OK</span></td></tr>
+        <tr><td>WebSite + SearchAction</td><td><span class="badge badge-pass">OK</span></td></tr>
+        <tr><td>BreadcrumbList</td><td><span class="badge badge-pass">OK</span></td></tr>
+        <tr><td>Product + Offer</td><td><span class="badge badge-warn">Issues</span></td></tr>
+        <tr><td>FAQPage (on /faq/)</td><td><span class="badge badge-pass">OK</span></td></tr>
+        <tr><td>WebPage</td><td><span class="badge badge-pass">OK</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h4>Missing Schema</h4>
+    <table>
+      <thead><tr><th>Type</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td>AggregateRating / Review</td><td><span class="badge badge-high">High</span></td></tr>
+        <tr><td>Product <code>brand</code></td><td><span class="badge badge-critical">Critical</span></td></tr>
+        <tr><td>MerchantReturnPolicy</td><td><span class="badge badge-medium">Medium</span></td></tr>
+        <tr><td>OfferShippingDetails</td><td><span class="badge badge-medium">Medium</span></td></tr>
+        <tr><td>VideoObject</td><td><span class="badge badge-medium">Medium</span></td></tr>
+        <tr><td>Twitter Card meta</td><td><span class="badge badge-medium">Medium</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ VISUAL & MOBILE ═══ -->
+<div class="page-break"></div>
+<h2 class="mt-0"><span class="idx">7</span> Visual &amp; Mobile Analysis</h2>
+
+<h3>Above-the-Fold CTA Visibility</h3>
+<table>
+  <thead><tr><th>Viewport</th><th>Primary CTA Position</th><th>Visible?</th></tr></thead>
+  <tbody>
+    <tr><td>Desktop (1920&times;1080)</td><td>"Shop ALL Products Now" at y=890</td><td><span class="badge badge-pass">Yes</span></td></tr>
+    <tr><td>Laptop (1366&times;768)</td><td>"Shop ALL Products Now" at y=877</td><td><span class="badge badge-fail">No</span> fold at 768</td></tr>
+    <tr><td>Mobile (375&times;812)</td><td>"Shop ALL Products Now" at y=1168</td><td><span class="badge badge-fail">No</span> 1.4 screens down</td></tr>
+  </tbody>
+</table>
+
+<h3>Mobile Responsiveness Checklist</h3>
+<table>
+  <thead><tr><th>Criterion</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td>Viewport meta tag</td><td><span class="badge badge-pass">Pass</span></td></tr>
+    <tr><td>No horizontal scroll</td><td><span class="badge badge-pass">Pass</span></td></tr>
+    <tr><td>Hamburger menu</td><td><span class="badge badge-pass">Pass</span></td></tr>
+    <tr><td>Images scale properly</td><td><span class="badge badge-pass">Pass</span></td></tr>
+    <tr><td>Navigation accessible</td><td><span class="badge badge-pass">Pass</span></td></tr>
+    <tr><td>Base font &ge; 16px</td><td><span class="badge badge-fail">Fail</span> 14px on mobile</td></tr>
+    <tr><td>Touch targets &ge; 48px</td><td><span class="badge badge-fail">Fail</span> Search: 33px, Footer: 18-21px</td></tr>
+    <tr><td>Primary CTA above fold</td><td><span class="badge badge-fail">Fail</span></td></tr>
+    <tr><td>Content readable without zoom</td><td><span class="badge badge-warn">Marginal</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ AI READINESS ═══ -->
+<h2><span class="idx">8</span> AI Search Readiness <span class="h2-score">21 / 100</span></h2>
+
+<h4>Platform-Specific Readiness</h4>
+<div class="platform-grid">
+  <div class="platform-card"><div class="plat-name">Google AI Overviews</div><div class="plat-score" style="color: var(--rose);">15</div><div class="plat-note">Google-Extended blocked. No informational content.</div></div>
+  <div class="platform-card"><div class="plat-name">ChatGPT Search</div><div class="plat-score" style="color: var(--rose);">5</div><div class="plat-note">GPTBot explicitly blocked.</div></div>
+  <div class="platform-card"><div class="plat-name">Perplexity</div><div class="plat-score" style="color: var(--amber);">25</div><div class="plat-note">Allowed but almost no citable content.</div></div>
+  <div class="platform-card"><div class="plat-name">Bing Copilot</div><div class="plat-score" style="color: var(--amber);">20</div><div class="plat-note">Same content thinness problem.</div></div>
+</div>
+
+<h4>Brand Mention Signals</h4>
+<table>
+  <thead><tr><th>Signal</th><th>Status</th><th>AI Citation Correlation</th></tr></thead>
+  <tbody>
+    <tr><td>Wikipedia</td><td><span class="badge badge-missing">Not Present</span></td><td>High — major gap</td></tr>
+    <tr><td>YouTube</td><td><span class="badge badge-present">Channel Exists</span></td><td>Strongest (~0.737)</td></tr>
+    <tr><td>Reddit</td><td><span class="badge badge-warn">Not Confirmed</span></td><td>High — likely gap</td></tr>
+    <tr><td>Facebook</td><td><span class="badge badge-present">Present</span></td><td>Low-moderate</td></tr>
+    <tr><td>Instagram</td><td><span class="badge badge-present">Present</span></td><td>Low</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ SITEMAP ═══ -->
+<h2><span class="idx">9</span> Sitemap Summary</h2>
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-value">536</div><div class="stat-label">Total URLs</div></div>
+  <div class="stat-card"><div class="stat-value">306</div><div class="stat-label">Products</div></div>
+  <div class="stat-card"><div class="stat-value">42</div><div class="stat-label">Categories</div></div>
+  <div class="stat-card"><div class="stat-value">2,296</div><div class="stat-label">Image Entries</div></div>
+</div>
+<table>
+  <thead><tr><th>#</th><th>Issue</th><th>Severity</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Query string URL in shipping class sitemap</td><td><span class="badge badge-high">High</span></td></tr>
+    <tr><td>2</td><td>Duplicate /customer-testimonials/ across 3 sitemaps</td><td><span class="badge badge-high">High</span></td></tr>
+    <tr><td>3</td><td>187 products with duplicate image:loc entries</td><td><span class="badge badge-medium">Medium</span></td></tr>
+    <tr><td>4</td><td>Product attribute taxonomy pages indexed (19 URLs)</td><td><span class="badge badge-medium">Medium</span></td></tr>
+    <tr><td>5</td><td>/product-category/uncategorized/ in sitemap</td><td><span class="badge badge-medium">Medium</span></td></tr>
+    <tr><td>6</td><td>108 thin individual testimonial pages</td><td><span class="badge badge-medium">Medium</span></td></tr>
+    <tr><td>7</td><td>/shop/ missing from sitemap</td><td><span class="badge badge-medium">Medium</span></td></tr>
+    <tr><td>8</td><td>Utility/affiliate pages included</td><td><span class="badge badge-low">Low</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ ACTION PLAN ═══ -->
+<div class="page-break"></div>
+<h2 class="mt-0"><span class="idx">10</span> Action Plan</h2>
+
+<h3>Critical — Fix Immediately</h3>
+<div class="action"><div class="action-num crit">1</div><div class="action-title">Enable LiteSpeed Cache</div><div class="action-meta"><span>Effort: 15 min</span> <span>Impact: TTFB 1.2s &rarr; &lt;200ms</span></div><div class="action-desc">Install/enable LiteSpeed Cache plugin with full-page caching. The server is already LiteSpeed — this is just activating the plugin.</div></div>
+<div class="action"><div class="action-num crit">2</div><div class="action-title">Lazy-load or remove the 7.2MB background video</div><div class="action-meta"><span>Effort: 30 min</span> <span>Impact: -7MB off initial load</span></div><div class="action-desc">Add <code>preload="none"</code> to the video element. Set proper cache headers. Consider replacing with poster image + play-on-click.</div></div>
+<div class="action"><div class="action-num crit">3</div><div class="action-title">Unblock GPTBot and Google-Extended in robots.txt</div><div class="action-meta"><span>Effort: 2 min</span> <span>Impact: Enables AI search citation</span></div><div class="action-desc">Remove the Disallow rules for GPTBot and Google-Extended. Immediate visibility to ChatGPT web search and Google AI Overviews.</div></div>
+<div class="action"><div class="action-num crit">4</div><div class="action-title">Add security headers</div><div class="action-meta"><span>Effort: 15 min</span> <span>Impact: Protects e-commerce customers</span></div><div class="action-desc">Add HSTS, X-Frame-Options, X-Content-Type-Options, CSP, Referrer-Policy, Permissions-Policy. Remove X-Powered-By header.</div></div>
+<div class="action"><div class="action-num crit">5</div><div class="action-title">Fix the dead "Continue Shopping" CTA</div><div class="action-meta"><span>Effort: 5 min</span> <span>Impact: Fixes broken conversion path</span></div><div class="action-desc">This prominent button links to <code>/#</code> (does nothing). Remove it or point it to <code>/shop/</code>.</div></div>
+<div class="action"><div class="action-num crit">6</div><div class="action-title">Add meta descriptions to all pages</div><div class="action-meta"><span>Effort: 2-3 hrs</span> <span>Impact: Immediate SERP improvement</span></div><div class="action-desc">In Yoast SEO, add unique 150-160 char meta descriptions to About Us, FAQ, all categories, Testimonials, and every page showing empty.</div></div>
+
+<h3>High Priority — Fix Within 1 Week</h3>
+<div class="action"><div class="action-num high">7</div><div class="action-title">Fix dual H1 tags on every page</div><div class="action-meta"><span>Effort: 15 min</span> <span>Impact: Correct heading hierarchy</span></div><div class="action-desc">Change logo/site-name tag from &lt;h1&gt; to &lt;div&gt; in Beaver Builder Header Layout settings.</div></div>
+<div class="action"><div class="action-num high">8</div><div class="action-title">Add Product brand to all product schema</div><div class="action-meta"><span>Effort: 30 min</span> <span>Impact: Enables Product rich results</span></div><div class="action-desc">Google requires <code>brand</code> for Product rich results. Add via Yoast SEO WooCommerce settings or custom filter.</div></div>
+<div class="action"><div class="action-num high">9</div><div class="action-title">Increase mobile base font to 16px</div><div class="action-meta"><span>Effort: 15 min</span> <span>Impact: Pass mobile-friendly test</span></div><div class="action-desc">Currently 14px on mobile. Update Beaver Builder responsive font settings to 16px minimum on all viewports.</div></div>
+<div class="action"><div class="action-num high">10</div><div class="action-title">Add CTA above the fold on mobile</div><div class="action-meta"><span>Effort: 1 hr</span> <span>Impact: Conversion rate improvement</span></div><div class="action-desc">First CTA is at y=1168 on mobile. Add "Find Your Mount" button within first 500px. Promote Product Wizard as primary CTA.</div></div>
+<div class="action"><div class="action-num high">11</div><div class="action-title">Noindex 108 thin testimonial pages</div><div class="action-meta"><span>Effort: 1 hr</span> <span>Impact: Remove thin content signal</span></div><div class="action-desc">Set testimonial CPT to noindex in Yoast. 301 redirect individual URLs to main testimonials page.</div></div>
+<div class="action"><div class="action-num high">12</div><div class="action-title">Remove unused CSS/JS on homepage</div><div class="action-meta"><span>Effort: 2 hrs</span> <span>Impact: -800KB, -3,820ms mobile</span></div><div class="action-desc">Install Asset CleanUp or Perfmatters. Dequeue WooCommerce, Dashicons, Font Awesome, Geotargeting, AffiliateWP, YayPricing CSS/JS.</div></div>
+<div class="action"><div class="action-num high">13</div><div class="action-title">Disable WooCommerce cart fragments</div><div class="action-meta"><span>Effort: 10 min</span> <span>Impact: Eliminates unnecessary AJAX</span></div><div class="action-desc">Dequeue <code>wc-cart-fragments</code> on non-cart/checkout pages via <code>functions.php</code>.</div></div>
+
+<!-- ═══ MEDIUM + LOW PRIORITY ═══ -->
+<div class="page-break"></div>
+<h3 style="margin-top: 0;">Medium Priority — Fix Within 1 Month</h3>
+<table>
+  <thead><tr><th>#</th><th>Action</th><th>Effort</th><th>Impact</th></tr></thead>
+  <tbody>
+    <tr><td>14</td><td>Add 200-400 word descriptions to all category pages</td><td>3-5 days</td><td>Rankable category pages</td></tr>
+    <tr><td>15</td><td>Create blog/resource center (8+ articles)</td><td>2-4 weeks</td><td>Top-of-funnel traffic, AI citability</td></tr>
+    <tr><td>16</td><td>Enrich product pages (specs, reviews, FAQ, video)</td><td>1-2 weeks</td><td>Rich snippets, better UX</td></tr>
+    <tr><td>17</td><td>Clean up sitemap issues (7 items)</td><td>2 hours</td><td>Cleaner crawl budget</td></tr>
+    <tr><td>18</td><td>Self-host Google Fonts with font-display: swap</td><td>1 hour</td><td>Eliminate render-blocking</td></tr>
+    <tr><td>19</td><td>Build About Us into authority page (founders, address)</td><td>2-3 hours</td><td>E-E-A-T signals</td></tr>
+    <tr><td>20</td><td>Curate llms.txt manually</td><td>1-2 hours</td><td>Better AI understanding</td></tr>
+    <tr><td>21</td><td>Implement IndexNow protocol</td><td>15 min</td><td>Instant Bing/Yandex indexing</td></tr>
+  </tbody>
+</table>
+
+<h3>Low Priority — Backlog</h3>
+<table>
+  <thead><tr><th>#</th><th>Action</th><th>Effort</th></tr></thead>
+  <tbody>
+    <tr><td>22</td><td>Fix og:title on homepage (currently "Home")</td><td>5 min</td></tr>
+    <tr><td>23</td><td>Add Twitter Card meta tags site-wide</td><td>15 min</td></tr>
+    <tr><td>24</td><td>Fix ItemList schema (add position to ListItems)</td><td>30 min</td></tr>
+    <tr><td>25</td><td>Remove jQuery Migrate (~10KB)</td><td>15 min</td></tr>
+    <tr><td>26</td><td>Shorten excessively long product URL slugs</td><td>1 hour</td></tr>
+    <tr><td>27</td><td>Darken body text for WCAG contrast (#757575 &rarr; #595959)</td><td>5 min</td></tr>
+    <tr><td>28</td><td>Implement responsive srcset on product images</td><td>2 hours</td></tr>
+    <tr><td>29</td><td>Convert images to WebP/AVIF</td><td>30 min</td></tr>
+    <tr><td>30</td><td>Consolidate duplicate GTM scripts</td><td>1 hour</td></tr>
+    <tr><td>31</td><td>Set long cache TTLs (1 year) for static assets</td><td>30 min</td></tr>
+    <tr><td>32-40</td><td>YouTube strategy, Reddit presence, returns page, trust badges, compatibility matrix, header height, touch targets, CLS fix, native lazy loading</td><td>Ongoing</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══ TIMELINE ═══ -->
+<h2><span class="idx">11</span> Projected Timeline</h2>
+<div class="timeline">
+  <div class="timeline-card">
+    <div class="timeline-header">Week 1 (Items 1-13)</div>
+    <div class="timeline-body">
+      <ul>
+        <li>Enable caching, fix video</li>
+        <li>Remove unused CSS/JS</li>
+        <li>Add security headers</li>
+        <li>Fix CTAs, H1s, font sizes</li>
+        <li>Add meta descriptions</li>
+        <li>Noindex thin pages</li>
+      </ul>
+      <div class="timeline-score">46 &rarr; 62</div>
+    </div>
+  </div>
+  <div class="timeline-card">
+    <div class="timeline-header">Weeks 2-4 (Items 14-21)</div>
+    <div class="timeline-body">
+      <ul>
+        <li>Add category descriptions</li>
+        <li>Start blog content</li>
+        <li>Enrich product schema</li>
+        <li>Clean up sitemap</li>
+        <li>Build About page</li>
+        <li>Curate llms.txt</li>
+      </ul>
+      <div class="timeline-score">62 &rarr; 72</div>
+    </div>
+  </div>
+  <div class="timeline-card">
+    <div class="timeline-header">Month 2+ (Items 22-40)</div>
+    <div class="timeline-body">
+      <ul>
+        <li>Polish remaining issues</li>
+        <li>Publish 2-3 articles/week</li>
+        <li>Build external authority</li>
+        <li>YouTube, Reddit presence</li>
+        <li>Image optimization</li>
+        <li>Ongoing improvements</li>
+      </ul>
+      <div class="timeline-score">72 &rarr; 80+</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TOP 5 ROI ═══ -->
+<h2><span class="idx">12</span> Top 5 Highest-ROI Actions</h2>
+<table class="roi-table">
+  <thead><tr><th>#</th><th>Action</th><th>Time</th><th>Impact</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1</strong></td><td>Enable LiteSpeed Cache</td><td>15 min</td><td>TTFB drops from 1.2s to &lt;200ms</td></tr>
+    <tr><td><strong>2</strong></td><td>Defer/remove 7MB video + unused CSS/JS</td><td>1-2 hrs</td><td>Mobile LCP from 15.2s to &lt;4s</td></tr>
+    <tr><td><strong>3</strong></td><td>Add meta descriptions site-wide</td><td>2-3 hrs</td><td>Immediate SERP improvement for all pages</td></tr>
+    <tr><td><strong>4</strong></td><td>Unblock GPTBot + Google-Extended</td><td>2 min</td><td>Enables AI search citation</td></tr>
+    <tr><td><strong>5</strong></td><td>Add security headers</td><td>15 min</td><td>Protects customers, builds trust</td></tr>
+  </tbody>
+</table>
+
+<div class="exec-summary" style="text-align: center; margin-top: 24px;">
+  <p style="font-size: 13px; font-weight: 600;">These five actions alone could lift the health score from <strong style="color: var(--rose);">46</strong> to <strong style="color: var(--emerald);">60+</strong> within a week.</p>
+</div>
+
+<div class="report-footer">
+  Generated by Claude SEO &middot; March 27, 2026 &middot; fishfindermounts.com
+</div>
+
+</body>
+</html>
