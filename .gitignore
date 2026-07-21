@@ -185,3 +185,7 @@ dataforseo-mcp-config.json
 
 # installer-generated at runtime from extensions/dataforseo/field-config.json
 skills/seo/dataforseo-field-config.json
+
+# site-specific audit deliverables — keep local
+fishfindermounts-schema-audit.md
+seo-report.html
